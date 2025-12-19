@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloom Library</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <h1>Bloom<br>Library</h1>
+            </div>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul>
+                <li>
+                    <a href="#" class="nav-item active" data-section="dashboard">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                        <div class="nav-indicator"></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-item" data-section="books">
+                        <i class="fas fa-book-open"></i>
+                        <span>Books Collection</span>
+                        <div class="nav-indicator"></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-item" data-section="members">
+                        <i class="fas fa-user-friends"></i>
+                        <span>Members</span>
+                        <div class="nav-indicator"></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-item" data-section="loans">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Book Loans</span>
+                        <div class="nav-indicator"></div>
+                    </a>
+                </li>
+                <li class="nav-divider"></li>
+                <li>
+                    <a href="#" class="nav-item" data-section="add-book">
+                        <i class="fas fa-book-medical"></i>
+                        <span>Add New Book</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-item" data-section="add-member">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Add New Member</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="api-status">
+                <div class="status-dot" id="status-dot"></div>
+                <span id="api-status-text">Connecting...</span>
+            </div>
+            <button class="theme-btn">
+                <i class="fas fa-palette"></i>
+                <span>Theme</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search books, members, or loans..." id="global-search">
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-details">
+                    <span class="user-name">Library Manager</span>
+                    <span class="user-role">Administrator</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="content-section active">
+            <div class="section-header">
+                <h2>Library Overview</h2>
+                <p>Welcome to Bloom Library Management</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card elegant">
+                    <div class="stat-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Books</h3>
+                        <p class="stat-number" id="total-books">0</p>
+                        <span class="stat-trend">+12 this month</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card elegant">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Active Members</h3>
+                        <p class="stat-number" id="total-members">0</p>
+                        <span class="stat-trend">+5 this month</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card elegant">
+                    <div class="stat-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Active Loans</h3>
+                        <p class="stat-number" id="active-loans">0</p>
+                        <span class="stat-trend">3 to return</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card elegant">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Overdue</h3>
+                        <p class="stat-number" id="overdue-loans">0</p>
+                        <span class="stat-trend warning">Requires attention</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> Recent Activity</h3>
+                    </div>
+                    <div class="activity-timeline" id="activity-timeline">
+                        <!-- Activities will be populated here -->
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-star"></i> Popular This Month</h3>
+                    </div>
+                    <div class="popular-books" id="popular-books">
+                        <!-- Popular books will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Books Section -->
+        <section id="books" class="content-section">
+            <div class="section-header">
+                <div>
+                    <h2>Books Collection</h2>
+                    <p>Manage your library's book inventory</p>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-export">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                    <button class="btn-primary" id="add-book-btn">
+                        <i class="fas fa-plus"></i> Add Book
+                    </button>
+                </div>
+            </div>
+            
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <label>Filter by:</label>
+                    <select id="category-filter">
+                        <option>All Categories</option>
+                        <option>Fiction</option>
+                        <option>Non-Fiction</option>
+                        <option>Science</option>
+                        <option>Literature</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Sort by:</label>
+                    <select id="sort-books">
+                        <option>Newest First</option>
+                        <option>Title A-Z</option>
+                        <option>Most Available</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="books-grid" id="books-grid">
+                <!-- Books will be displayed as cards -->
+            </div>
+            
+            <div class="pagination">
+                <button class="pagination-btn" id="prev-page">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="page-numbers">
+                    <span class="page-number active">1</span>
+                    <span class="page-number">2</span>
+                    <span class="page-number">3</span>
+                </div>
+                <button class="pagination-btn" id="next-page">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Members Section -->
+        <section id="members" class="content-section">
+            <div class="section-header">
+                <div>
+                    <h2>Library Members</h2>
+                    <p>Manage member accounts and information</p>
+                </div>
+                <button class="btn-primary" id="add-member-btn">
+                    <i class="fas fa-user-plus"></i> Add Member
+                </button>
+            </div>
+            
+            <div class="table-container">
+                <table class="members-table">
+                    <thead>
+                        <tr>
+                            <th>Member</th>
+                            <th>Join Date</th>
+                            <th>Status</th>
+                            <th>Active Loans</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="members-table-body">
+                        <!-- Members will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Loans Section -->
+        <section id="loans" class="content-section">
+            <div class="section-header">
+                <div>
+                    <h2>Book Loans</h2>
+                    <p>Track book borrowing and returns</p>
+                </div>
+                <button class="btn-primary" id="new-loan-btn">
+                    <i class="fas fa-exchange-alt"></i> New Loan
+                </button>
+            </div>
+            
+            <div class="loans-container">
+                <div class="loans-grid" id="loans-grid">
+                    <!-- Loans will be displayed as cards -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Add Book Section -->
+        <section id="add-book" class="content-section">
+            <div class="section-header">
+                <h2>Add New Book</h2>
+                <p>Expand your library's collection</p>
+            </div>
+            
+            <div class="form-container">
+                <form id="add-book-form" class="elegant-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="isbn">
+                                <i class="fas fa-barcode"></i>
+                                ISBN Number
+                            </label>
+                            <input type="text" id="isbn" name="isbn" required>
+                            <div class="form-hint">Unique book identifier</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="title">
+                                <i class="fas fa-heading"></i>
+                                Book Title
+                            </label>
+                            <input type="text" id="title" name="title" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="author">
+                                <i class="fas fa-user-pen"></i>
+                                Author
+                            </label>
+                            <input type="text" id="author" name="author" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="copies">
+                                <i class="fas fa-copy"></i>
+                                Number of Copies
+                            </label>
+                            <input type="number" id="copies" name="copies" min="0" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">
+                            <i class="fas fa-align-left"></i>
+                            Description (Optional)
+                        </label>
+                        <textarea id="description" name="description" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-book-medical"></i>
+                            Add to Library
+                        </button>
+                        <button type="reset" class="btn-reset">
+                            <i class="fas fa-redo"></i>
+                            Clear Form
+                        </button>
+                    </div>
+                    
+                    <div class="form-feedback" id="book-feedback"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Add Member Section -->
+        <section id="add-member" class="content-section">
+            <div class="section-header">
+                <h2>Add New Member</h2>
+                <p>Register new library members</p>
+            </div>
+            
+            <div class="form-container">
+                <form id="add-member-form" class="elegant-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="member-name">
+                                <i class="fas fa-user"></i>
+                                Full Name
+                            </label>
+                            <input type="text" id="member-name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="member-email">
+                                <i class="fas fa-envelope"></i>
+                                Email Address
+                            </label>
+                            <input type="email" id="member-email" name="email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="member-phone">
+                                <i class="fas fa-phone"></i>
+                                Phone Number (Optional)
+                            </label>
+                            <input type="tel" id="member-phone" name="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="member-type">
+                                <i class="fas fa-user-tag"></i>
+                                Member Type
+                            </label>
+                            <select id="member-type" name="type">
+                                <option value="regular">Regular Member</option>
+                                <option value="student">Student</option>
+                                <option value="premium">Premium Member</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-user-plus"></i>
+                            Register Member
+                        </button>
+                        <button type="reset" class="btn-reset">
+                            <i class="fas fa-redo"></i>
+                            Clear Form
+                        </button>
+                    </div>
+                    
+                    <div class="form-feedback" id="member-feedback"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <div class="modal" id="loan-modal">
+        <div class="modal-content slim">
+            <div class="modal-header">
+                <h3><i class="fas fa-exchange-alt"></i> New Book Loan</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="loan-form">
+                <div class="form-group">
+                    <label for="loan-member">Select Member</label>
+                    <div class="select-wrapper">
+                        <i class="fas fa-user"></i>
+                        <select id="loan-member" required>
+                            <option value="">Choose a member...</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loan-book">Select Book</label>
+                    <div class="select-wrapper">
+                        <i class="fas fa-book"></i>
+                        <select id="loan-book" required>
+                            <option value="">Choose a book...</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="due-date">Due Date</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input type="date" id="due-date" required>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-check"></i>
+                        Confirm Loan
+                    </button>
+                    <button type="button" class="btn-cancel modal-close">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
