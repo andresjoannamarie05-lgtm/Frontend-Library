@@ -53,7 +53,7 @@ A beautiful, modern library management system with botanical-themed design. Conn
 
 ## 🚀 Live Demo
 
-- **Frontend Demo**: [https://bloom-library-demo.netlify.app](https://bloom-library-demo.netlify.app) *(example)*
+- **Frontend Demo**: andresjoannamarie05-lgtm.github.io/Frontend-Library/
 - **Backend API**: `https://your-api.onrender.com/api` *(configure your own)*
 
 ##roject Structure
