@@ -93,6 +93,7 @@ bloom-library
 The app needs these endpoints
 
 **Books** 
+
 GET    /api/books
 
 POST   /api/books
@@ -104,6 +105,7 @@ PUT    /api/books/:id
 DELETE /api/books/:id
 
 **Members**
+
 GET    /api/members
 
 POST   /api/members
@@ -115,6 +117,7 @@ PUT    /api/members/:id
 DELETE /api/members/:id
 
 **Loans**
+
 GET    /api/loans
 
 POST   /api/loans
