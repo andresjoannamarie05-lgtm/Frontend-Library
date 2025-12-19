@@ -53,8 +53,8 @@ A beautiful, modern library management system with botanical-themed design. Conn
 
 ## 🚀 Live Demo
 
-- **Frontend Demo**: andresjoannamarie05-lgtm.github.io/Frontend-Library/
-- **Backend API**: `https://your-api.onrender.com/api` *(configure your own)*
+- **Frontend Demo**: https://andresjoannamarie05-lgtm.github.io/Frontend-Library/
+- **Backend API**: 
 
 ##roject Structure
 
